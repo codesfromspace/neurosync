@@ -1,0 +1,129 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = 'Psychiatrist & AI Researcher' } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title} — NeuroSync</title>
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="nav-container">
+        <a href="/" class="logo">NeuroSync</a>
+        <ul class="nav-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/blog">Blog</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="footer">
+      <div class="footer-container">
+        <p>&copy; 2026 NeuroSync. All rights reserved.</p>
+        <div class="social-links">
+          <a href="https://twitter.com" aria-label="Twitter">Twitter</a>
+          <a href="https://linkedin.com" aria-label="LinkedIn">LinkedIn</a>
+          <a href="mailto:hello@neurosync.dev" aria-label="Email">Email</a>
+        </div>
+      </div>
+    </footer>
+
+    <style>
+      .navbar {
+        background: var(--bg-secondary);
+        border-bottom: 1px solid var(--border);
+        sticky: top;
+        top: 0;
+        z-index: 100;
+      }
+
+      .nav-container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 1rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        font-size: 1.5rem;
+        font-weight: bold;
+        background: linear-gradient(120deg, var(--accent-light), var(--accent));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .nav-links {
+        display: flex;
+        list-style: none;
+        gap: 2rem;
+      }
+
+      .nav-links a {
+        color: var(--text-secondary);
+        transition: color 0.2s;
+      }
+
+      .nav-links a:hover {
+        color: var(--accent-light);
+      }
+
+      .footer {
+        background: var(--bg-secondary);
+        border-top: 1px solid var(--border);
+        margin-top: 4rem;
+      }
+
+      .footer-container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: var(--text-secondary);
+      }
+
+      .social-links {
+        display: flex;
+        gap: 1.5rem;
+      }
+
+      .social-links a {
+        color: var(--text-secondary);
+      }
+
+      @media (max-width: 768px) {
+        .nav-container,
+        .footer-container {
+          flex-direction: column;
+          gap: 1rem;
+        }
+
+        .nav-links {
+          gap: 1rem;
+        }
+      }
+    </style>
+  </body>
+</html>
