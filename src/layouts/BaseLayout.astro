@@ -1,17 +1,18 @@
 ---
 import '../styles/global.css';
-import { initTheme, toggleTheme } from '../scripts/theme';
+import { type Language } from '../i18n/utils';
 
 interface Props {
   title: string;
   description?: string;
+  lang?: Language;
 }
 
-const { title, description = 'Psychiatrist & AI Researcher' } = Astro.props;
+const { title, description = 'Psychiatrist & AI Researcher', lang = 'en' } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang === 'cz' ? 'cs' : 'en'}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />

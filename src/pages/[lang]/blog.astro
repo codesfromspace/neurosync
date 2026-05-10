@@ -1,0 +1,162 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { useTranslations, type Language, defaultLanguage } from '../../i18n/utils';
+
+interface Props {
+  params: {
+    lang: Language;
+  };
+}
+
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'en' } },
+    { params: { lang: 'cz' } },
+  ];
+}
+
+interface BlogPost {
+  slug: string;
+  data: {
+    title: string;
+    date: Date;
+    excerpt: string;
+  };
+}
+
+const { lang = defaultLanguage } = Astro.params as any;
+const t = useTranslations(lang as Language);
+
+const posts: BlogPost[] = [
+  {
+    slug: 'ai-psychiatry-future',
+    data: {
+      title: 'The Future of AI in Psychiatry',
+      date: new Date('2026-05-10'),
+      excerpt:
+        'Exploring how machine learning is reshaping diagnostic and therapeutic approaches in clinical psychiatry.',
+    },
+  },
+  {
+    slug: 'ethics-mental-health-ai',
+    data: {
+      title: 'Ethics in Mental Health AI',
+      date: new Date('2026-04-28'),
+      excerpt:
+        'Critical considerations for developing trustworthy AI in clinical psychiatric settings.',
+    },
+  },
+  {
+    slug: 'digital-therapeutics-evidence',
+    data: {
+      title: 'Digital Therapeutics: Evidence and Reality',
+      date: new Date('2026-04-15'),
+      excerpt:
+        'What does the evidence tell us about the effectiveness of digital mental health interventions?',
+    },
+  },
+];
+
+const sortedPosts = posts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+---
+
+<BaseLayout title={t('blog')} description="Articles on psychiatry, AI, and mental healthcare" lang={lang as Language}>
+  <section class="blog-page">
+    <h1>{t('blog')}</h1>
+    <p class="blog-intro">
+      Exploring the intersection of psychiatry, artificial intelligence, and the future of
+      mental healthcare.
+    </p>
+
+    <div class="blog-list">
+      {
+        sortedPosts.map((post) => (
+          <article class="blog-item">
+            <h2>
+              <a href={`/${lang}/blog/${post.slug}`}>{post.data.title}</a>
+            </h2>
+            <p class="date">
+              {post.data.date.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+              })}
+            </p>
+            <p class="excerpt">{post.data.excerpt}</p>
+            <a href={`/${lang}/blog/${post.slug}`} class="read-link">
+              {t('readMore')}
+            </a>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .blog-page {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .blog-intro {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    margin-bottom: 3rem;
+  }
+
+  .blog-list {
+    display: grid;
+    gap: 2.5rem;
+  }
+
+  .blog-item {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 2.5rem;
+  }
+
+  .blog-item:last-child {
+    border-bottom: none;
+  }
+
+  .blog-item h2 {
+    margin-bottom: 0.5rem;
+  }
+
+  .blog-item h2 a {
+    color: var(--accent-light);
+    transition: color 0.2s;
+  }
+
+  .blog-item h2 a:hover {
+    color: var(--text-primary);
+  }
+
+  .date {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+
+  .excerpt {
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
+
+  .read-link {
+    color: var(--accent);
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .read-link:hover {
+    color: var(--accent-light);
+  }
+
+  @media (max-width: 768px) {
+    .blog-page {
+      padding: 0;
+    }
+  }
+</style>

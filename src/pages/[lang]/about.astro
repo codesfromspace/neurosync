@@ -1,0 +1,274 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { useTranslations, type Language, defaultLanguage } from '../../i18n/utils';
+
+interface Props {
+  params: {
+    lang: Language;
+  };
+}
+
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'en' } },
+    { params: { lang: 'cz' } },
+  ];
+}
+
+const { lang = defaultLanguage } = Astro.params as any;
+const t = useTranslations(lang as Language);
+---
+
+<BaseLayout title={t('about')} description="About Dr. NeuroSync - Psychiatrist and AI Researcher" lang={lang as Language}>
+  <article class="about-page">
+    <h1>{t('about')}</h1>
+
+    <section class="bio">
+      <h2>Professional Background</h2>
+      <p>
+        I am a psychiatrist with a deep passion for exploring the transformative potential of
+        artificial intelligence in mental healthcare. My journey combines clinical practice,
+        research, and technology development to bridge the gap between traditional psychiatry
+        and cutting-edge AI applications.
+      </p>
+
+      <h2>Focus Areas</h2>
+      <ul class="focus-list">
+        <li>
+          <strong>Clinical AI Applications:</strong> Developing and evaluating machine learning
+          models for psychiatric diagnosis, treatment planning, and outcome prediction.
+        </li>
+        <li>
+          <strong>Digital Therapeutics:</strong> Researching evidence-based digital interventions
+          and their clinical efficacy in treating mental health disorders.
+        </li>
+        <li>
+          <strong>Ethics & Responsible AI:</strong> Addressing ethical challenges in deploying AI
+          within clinical psychiatric settings.
+        </li>
+        <li>
+          <strong>Neurotechnology:</strong> Exploring brain-computer interfaces and real-time
+          neural monitoring for psychiatric care.
+        </li>
+      </ul>
+
+      <h2>Education & Credentials</h2>
+      <p>
+        [Add your education details, certifications, and credentials here]
+      </p>
+
+      <h2>Publications & Speaking</h2>
+      <p>
+        I regularly publish research and speak at conferences on the intersection of psychiatry
+        and artificial intelligence. My work has been featured in leading journals and at major
+        healthcare technology events.
+      </p>
+    </section>
+
+    <section class="services">
+      <h2>Services & Collaboration</h2>
+      <div class="service-cards">
+        <div class="service-card">
+          <h3>Consultation</h3>
+          <p>
+            Strategic guidance on implementing AI in psychiatric clinical settings and research
+            environments.
+          </p>
+        </div>
+        <div class="service-card">
+          <h3>Research Collaboration</h3>
+          <p>
+            Partnership on research projects exploring AI applications in mental health and
+            clinical psychiatry.
+          </p>
+        </div>
+        <div class="service-card">
+          <h3>Speaking & Workshops</h3>
+          <p>
+            Educational sessions and workshops for healthcare professionals on AI in psychiatry.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact-cta">
+      <h2>{t('connectWith')}</h2>
+      <p>
+        Interested in collaboration, consultation, or just want to discuss psychiatry and AI?
+      </p>
+      <div class="contact-methods">
+        <div class="contact-item">
+          <p><strong>{t('personalEmail')}</strong> <a href="mailto:jakub.hajny@gmail.com">jakub.hajny@gmail.com</a></p>
+        </div>
+        <div class="contact-item">
+          <p><strong>{t('professionalEmail')}</strong> <a href="mailto:psychiatr-pr@klinikaeset.cz">psychiatr-pr@klinikaeset.cz</a></p>
+        </div>
+      </div>
+      <div class="social-list">
+        <a href="https://bsky.app/profile/jakub-hajny.bsky.social" class="social-btn">Bluesky</a>
+        <a href="https://www.linkedin.com/in/jakub-hajn%C3%BD-696989151/" class="social-btn">LinkedIn</a>
+        <a href="https://github.com/codesfromspace" class="social-btn">GitHub</a>
+      </div>
+    </section>
+  </article>
+</BaseLayout>
+
+<style>
+  .about-page {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .bio {
+    margin: 3rem 0;
+  }
+
+  .bio h2 {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .bio p {
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin-bottom: 1rem;
+  }
+
+  .focus-list {
+    list-style: none;
+    margin: 1.5rem 0;
+  }
+
+  .focus-list li {
+    background: var(--bg-secondary);
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    border-radius: 0.5rem;
+    border-left: 4px solid var(--accent);
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+
+  .focus-list strong {
+    color: var(--text-primary);
+  }
+
+  .services {
+    margin: 3rem 0;
+  }
+
+  .service-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .service-card {
+    background: var(--bg-secondary);
+    padding: 2rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--border);
+    transition: all 0.3s;
+  }
+
+  .service-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-4px);
+  }
+
+  .service-card h3 {
+    color: var(--accent-light);
+    margin-bottom: 1rem;
+  }
+
+  .service-card p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  .contact-cta {
+    text-align: center;
+    margin-top: 4rem;
+    padding: 3rem 2rem;
+    background: var(--bg-secondary);
+    border-radius: 0.75rem;
+    border: 1px solid var(--border);
+  }
+
+  .contact-cta h2 {
+    margin-bottom: 1rem;
+  }
+
+  .contact-cta p {
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+  }
+
+  .contact-methods {
+    margin: 2rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .contact-item {
+    background: var(--bg-tertiary);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    border-left: 4px solid var(--accent);
+  }
+
+  .contact-item p {
+    margin: 0;
+    color: var(--text-secondary);
+  }
+
+  .contact-item a {
+    color: var(--accent-light);
+    font-weight: 500;
+  }
+
+  .contact-item a:hover {
+    color: var(--text-primary);
+  }
+
+  .social-list {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+  }
+
+  .social-btn {
+    padding: 0.75rem 1.5rem;
+    background: var(--accent);
+    color: white;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    transition: background 0.2s;
+  }
+
+  .social-btn:hover {
+    background: var(--accent-light);
+  }
+
+  @media (max-width: 768px) {
+    .about-page {
+      padding: 0;
+    }
+
+    .focus-list li {
+      padding: 1rem;
+    }
+
+    .social-list {
+      flex-direction: column;
+    }
+
+    .social-btn {
+      width: 100%;
+    }
+  }
+</style>
