@@ -1,0 +1,57 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="brainGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#818cf8;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#6366f1;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Brain shape (left and right hemispheres) -->
+  <!-- Left hemisphere -->
+  <path d="M 60 50 Q 50 60 50 80 Q 50 110 65 130 Q 75 140 85 140 Q 80 120 80 100 Q 80 75 85 60 Q 80 50 70 50 Z" fill="url(#brainGradient)" opacity="0.9"/>
+
+  <!-- Right hemisphere -->
+  <path d="M 140 50 Q 150 60 150 80 Q 150 110 135 130 Q 125 140 115 140 Q 120 120 120 100 Q 120 75 115 60 Q 120 50 130 50 Z" fill="url(#brainGradient)" opacity="0.9"/>
+
+  <!-- Center connection (corpus callosum) -->
+  <ellipse cx="100" cy="85" rx="15" ry="25" fill="url(#brainGradient)" opacity="0.8"/>
+
+  <!-- Neural nodes (synapse points) -->
+  <!-- Top nodes -->
+  <circle cx="75" cy="55" r="4" fill="#818cf8" opacity="0.7"/>
+  <circle cx="100" cy="45" r="4" fill="#818cf8" opacity="0.7"/>
+  <circle cx="125" cy="55" r="4" fill="#818cf8" opacity="0.7"/>
+
+  <!-- Middle nodes -->
+  <circle cx="55" cy="85" r="3.5" fill="#6366f1" opacity="0.6"/>
+  <circle cx="145" cy="85" r="3.5" fill="#6366f1" opacity="0.6"/>
+
+  <!-- Bottom nodes -->
+  <circle cx="70" cy="125" r="4" fill="#818cf8" opacity="0.7"/>
+  <circle cx="100" cy="140" r="4" fill="#818cf8" opacity="0.7"/>
+  <circle cx="130" cy="125" r="4" fill="#818cf8" opacity="0.7"/>
+
+  <!-- Neural connections (sync lines) -->
+  <!-- Top connections -->
+  <line x1="75" y1="55" x2="100" y2="45" stroke="#818cf8" stroke-width="1.5" opacity="0.5" stroke-linecap="round"/>
+  <line x1="100" y1="45" x2="125" y2="55" stroke="#818cf8" stroke-width="1.5" opacity="0.5" stroke-linecap="round"/>
+
+  <!-- Side connections -->
+  <line x1="75" y1="55" x2="55" y2="85" stroke="#6366f1" stroke-width="1.5" opacity="0.4" stroke-linecap="round"/>
+  <line x1="125" y1="55" x2="145" y2="85" stroke="#6366f1" stroke-width="1.5" opacity="0.4" stroke-linecap="round"/>
+
+  <!-- Bottom connections -->
+  <line x1="55" y1="85" x2="70" y2="125" stroke="#818cf8" stroke-width="1.5" opacity="0.5" stroke-linecap="round"/>
+  <line x1="70" y1="125" x2="100" y2="140" stroke="#818cf8" stroke-width="1.5" opacity="0.5" stroke-linecap="round"/>
+  <line x1="100" y1="140" x2="130" y2="125" stroke="#818cf8" stroke-width="1.5" opacity="0.5" stroke-linecap="round"/>
+  <line x1="130" y1="125" x2="145" y2="85" stroke="#6366f1" stroke-width="1.5" opacity="0.4" stroke-linecap="round"/>
+
+  <!-- Sync arrows/pulse effect (subtle) -->
+  <g opacity="0.6">
+    <!-- Left arrow -->
+    <path d="M 70 85 L 75 80 L 75 90" stroke="#818cf8" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <!-- Right arrow -->
+    <path d="M 130 85 L 125 80 L 125 90" stroke="#818cf8" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>
