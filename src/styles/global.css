@@ -112,6 +112,58 @@ blockquote {
   font-style: italic;
 }
 
+/* Light theme with warm tones */
+:root[data-theme="light"] {
+  --bg-primary: #fafaf8;
+  --bg-secondary: #f5f1eb;
+  --bg-tertiary: #ede8e0;
+  --text-primary: #2d2520;
+  --text-secondary: #6b5f52;
+  --accent: #d97706;
+  --accent-light: #f59e0b;
+  --accent-dark: #b45309;
+  --border: #ddd1c4;
+}
+
+:root[data-theme="light"] html {
+  background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+}
+
+:root[data-theme="light"] h1 {
+  background: linear-gradient(120deg, var(--accent-light) 0%, var(--accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+:root[data-theme="light"] h2 {
+  color: var(--accent-dark);
+}
+
+:root[data-theme="light"] .card {
+  background: var(--bg-secondary);
+  border-color: var(--border);
+}
+
+:root[data-theme="light"] .card:hover {
+  border-color: var(--accent);
+}
+
+:root[data-theme="light"] .navbar {
+  background: var(--bg-secondary);
+  border-bottom-color: var(--border);
+}
+
+:root[data-theme="light"] .footer {
+  background: var(--bg-secondary);
+  border-top-color: var(--border);
+}
+
+/* Smooth theme transition */
+html {
+  transition: background-color 0.3s, color 0.3s;
+}
+
 @media (max-width: 768px) {
   h1 {
     font-size: 2rem;

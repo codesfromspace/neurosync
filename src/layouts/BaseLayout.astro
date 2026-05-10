@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import { initTheme, toggleTheme } from '../scripts/theme';
 
 interface Props {
   title: string;
@@ -17,16 +18,35 @@ const { title, description = 'Psychiatrist & AI Researcher' } = Astro.props;
     <meta name="description" content={description} />
     <link rel="icon" type="image/svg+xml" href="/neurosync/favicon.svg" />
     <title>{title} — NeuroSync</title>
+    <script is:inline>
+      const THEME_KEY = 'neurosync-theme';
+      function initTheme() {
+        const html = document.documentElement;
+        const savedTheme = localStorage.getItem(THEME_KEY);
+        const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const theme = savedTheme || (systemDark ? 'dark' : 'light');
+        if (theme === 'light') {
+          html.setAttribute('data-theme', 'light');
+        } else {
+          html.removeAttribute('data-theme');
+        }
+      }
+      initTheme();
+    </script>
   </head>
   <body>
     <nav class="navbar">
       <div class="nav-container">
-        <a href="/neurosync/" class="logo">NeuroSync</a>
+        <a href="/neurosync/" class="logo">
+          <img src="/neurosync/logo.svg" alt="NeuroSync" class="logo-img" />
+          <span class="logo-text">NeuroSync</span>
+        </a>
         <ul class="nav-links">
           <li><a href="/neurosync/">Home</a></li>
           <li><a href="/neurosync/about">About</a></li>
           <li><a href="/neurosync/blog">Blog</a></li>
           <li><a href="#contact">Contact</a></li>
+          <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">🌙</button></li>
         </ul>
       </div>
     </nav>
@@ -39,9 +59,10 @@ const { title, description = 'Psychiatrist & AI Researcher' } = Astro.props;
       <div class="footer-container">
         <p>&copy; 2026 NeuroSync. All rights reserved.</p>
         <div class="social-links">
-          <a href="https://twitter.com" aria-label="Twitter">Twitter</a>
-          <a href="https://linkedin.com" aria-label="LinkedIn">LinkedIn</a>
-          <a href="mailto:hello@neurosync.dev" aria-label="Email">Email</a>
+          <a href="https://bsky.app/profile/jakub-hajny.bsky.social" aria-label="Bluesky">Bluesky</a>
+          <a href="https://www.linkedin.com/in/jakub-hajn%C3%BD-696989151/" aria-label="LinkedIn">LinkedIn</a>
+          <a href="https://github.com/codesfromspace" aria-label="GitHub">GitHub</a>
+          <a href="mailto:jakub.hajny@gmail.com" aria-label="Email">Email</a>
         </div>
       </div>
     </footer>
@@ -65,6 +86,20 @@ const { title, description = 'Psychiatrist & AI Researcher' } = Astro.props;
       }
 
       .logo {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        text-decoration: none;
+        color: inherit;
+      }
+
+      .logo-img {
+        width: 40px;
+        height: 40px;
+        display: block;
+      }
+
+      .logo-text {
         font-size: 1.5rem;
         font-weight: bold;
         background: linear-gradient(120deg, var(--accent-light), var(--accent));
@@ -85,6 +120,25 @@ const { title, description = 'Psychiatrist & AI Researcher' } = Astro.props;
       }
 
       .nav-links a:hover {
+        color: var(--accent-light);
+      }
+
+      .theme-toggle {
+        background: transparent;
+        border: 1px solid var(--border);
+        color: var(--text-secondary);
+        padding: 0.5rem 0.75rem;
+        border-radius: 0.5rem;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: all 0.2s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .theme-toggle:hover {
+        background: var(--bg-tertiary);
         color: var(--accent-light);
       }
 
@@ -125,5 +179,50 @@ const { title, description = 'Psychiatrist & AI Researcher' } = Astro.props;
         }
       }
     </style>
+
+    <script>
+      const THEME_KEY = 'neurosync-theme';
+
+      function toggleTheme() {
+        const html = document.documentElement;
+        const currentTheme = html.getAttribute('data-theme') || 'dark';
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+        if (newTheme === 'light') {
+          html.setAttribute('data-theme', 'light');
+        } else {
+          html.removeAttribute('data-theme');
+        }
+
+        localStorage.setItem(THEME_KEY, newTheme);
+        updateThemeButton(newTheme);
+      }
+
+      function updateThemeButton(theme: string) {
+        const btn = document.getElementById('theme-toggle');
+        if (btn) {
+          btn.textContent = theme === 'dark' ? '☀️' : '🌙';
+        }
+      }
+
+      // Initialize button on page load
+      function initThemeButton() {
+        const html = document.documentElement;
+        const currentTheme = html.getAttribute('data-theme') || 'dark';
+        const btn = document.getElementById('theme-toggle');
+
+        if (btn) {
+          btn.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
+          btn.addEventListener('click', toggleTheme);
+        }
+      }
+
+      // Wait for DOM to be ready
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initThemeButton);
+      } else {
+        initThemeButton();
+      }
+    </script>
   </body>
 </html>

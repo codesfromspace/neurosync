@@ -79,7 +79,19 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <p>
         Interested in collaboration, consultation, or just want to discuss psychiatry and AI?
       </p>
-      <a href="mailto:hello@neurosync.dev" class="btn btn-primary">Get in Touch</a>
+      <div class="contact-methods">
+        <div class="contact-item">
+          <p><strong>Personal:</strong> <a href="mailto:jakub.hajny@gmail.com">jakub.hajny@gmail.com</a></p>
+        </div>
+        <div class="contact-item">
+          <p><strong>Professional:</strong> <a href="mailto:psychiatr-pr@klinikaeset.cz">psychiatr-pr@klinikaeset.cz</a></p>
+        </div>
+      </div>
+      <div class="social-list">
+        <a href="https://bsky.app/profile/jakub-hajny.bsky.social" class="social-btn">Bluesky</a>
+        <a href="https://www.linkedin.com/in/jakub-hajn%C3%BD-696989151/" class="social-btn">LinkedIn</a>
+        <a href="https://github.com/codesfromspace" class="social-btn">GitHub</a>
+      </div>
     </section>
   </article>
 </BaseLayout>
@@ -187,6 +199,55 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   }
 
   .btn:hover {
+    background: var(--accent-light);
+  }
+
+  .contact-methods {
+    margin: 2rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .contact-item {
+    background: var(--bg-secondary);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    border-left: 4px solid var(--accent);
+  }
+
+  .contact-item p {
+    margin: 0;
+    color: var(--text-secondary);
+  }
+
+  .contact-item a {
+    color: var(--accent-light);
+    font-weight: 500;
+  }
+
+  .contact-item a:hover {
+    color: var(--text-primary);
+  }
+
+  .social-list {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+  }
+
+  .social-btn {
+    padding: 0.75rem 1.5rem;
+    background: var(--accent);
+    color: white;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    transition: background 0.2s;
+  }
+
+  .social-btn:hover {
     background: var(--accent-light);
   }
 
