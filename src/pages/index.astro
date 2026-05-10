@@ -1,16 +1,22 @@
----
-// Root redirect to preferred language
-const preferredLang = Astro.request.headers.get('accept-language')?.startsWith('cs') ? 'cz' : 'en';
----
-
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta http-equiv="refresh" content={`0;url=/${preferredLang}/`} />
     <title>Redirecting...</title>
+    <script>
+      // Detect language preference and redirect
+      function getPreferredLanguage() {
+        // Check if browser language starts with 'cs' for Czech
+        const browserLang = navigator.language || navigator.userLanguage;
+        return browserLang.startsWith('cs') ? 'cz' : 'en';
+      }
+
+      const preferredLang = getPreferredLanguage();
+      window.location.replace(`/neurosync/${preferredLang}/`);
+    </script>
+    <meta http-equiv="refresh" content="0;url=/neurosync/en/" />
   </head>
   <body>
-    <p>Redirecting to <a href={`/${preferredLang}/`}>your language</a>...</p>
+    <p>Redirecting to <a href="/neurosync/en/">your language</a>...</p>
   </body>
 </html>
